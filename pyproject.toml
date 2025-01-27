@@ -125,7 +125,7 @@ sphinxcontrib-bibtex = "^2.6.3"
 [tool.poetry.group.lint.dependencies]
 pre-commit = "^3.5.0"
 nbstripout = "^0.6.0"
-ruff = "0.6.9"
+ruff = "0.9.2"
 
 # Entry points -----------------------------------------------------------------
 [tool.poetry.scripts]
@@ -161,11 +161,39 @@ extend-include = ["*.ipynb"]
 exclude = ["tests/dummy_plugins/"]
 
 [tool.ruff.lint]
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
-# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
-# McCabe complexity (`C901`) by default.
-select = ["E4", "E7", "E9", "F"]
-ignore = []
+# Specify which rules to enforce. Each code corresponds to a specific linting category:
+select = [
+    "E",    # Enable pycodestyle error codes (e.g., whitespace, indentation).
+    "F",    # Enable Pyflakes for identifying logical errors.
+    "I",    # Import sorting using isort rules
+    "C901", # Enable McCabe complexity checks to avoid overly complex functions.
+    "D",    # Enable pydocstyle checks to enforce docstring conventions.
+    "W",    # Enable pycodestyle warnings (disabled by default in Ruff).
+    "N",    # Enforce PEP 8 naming conventions for consistency.
+    "A",    # Check for python builtins being used as variables or parameters.
+    "ANN",  # Ensure proper type annotations for function signatures.
+    "UP",   # Check for Python version upgrade compatibility.
+    "B",    # Enable bugbear checks for common mistakes and design flaws.
+    "ICN",  # Enforce import conventions, including ordering and structure.
+    "PIE",  # Encourage Python idiomatic expressions for cleaner code.
+    "S",    # Check for common security issues in the codebase (bandit).
+    "RUF",  # Ruff-specific rules.
+    "ERA",  # ERA find commented-out code from Python files.
+    "NPY",  # NumPy-specific rules.
+    "PT",   # A flake8 plugin checking common style issues with pytest-based tests.
+    "SIM",  # A flake8 plugin that helps you simplify your code.
+    "ARG",  # A flake8 plugin that checks for unused function arguments.
+    "PTH",  # A plugin for flake8 finding use of functions that can be replaced by pathlib module.
+    "Q",    # Flake8 Extension to lint for quotes.
+]
+
+# No rules are ignored by default. Specify rule codes here to suppress them.
+ignore = [
+    "ANN002",   # Missing type annotation for *args
+    "ANN003",   # Missing type annotation for **kwargs
+    "ANN101",   # Missing type annotation for self in method
+    "ANN102",   # Missing type annotation for cls in classmethod
+    ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
@@ -174,6 +202,30 @@ unfixable = []
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "ARG001",   # No unused argument in tests
+    "ANN001",   # No type annotation for tests
+    "ANN201",   # Missing return type annotation for public function `test_list_modules`
+    "D103",     # No missing docstring in public function
+    "S101",     # Assert can be used in tests
+    "PT004",    # Fixture does not return anything, add leading underscore
+] 
+"*/tests/*" = [
+    "ARG001",   # No unused argument in tests
+    "ANN001",   # No type annotation for tests
+    "ANN201",   # Missing return type annotation for public function `test_list_modules`
+    "D103",     # No missing docstring in public function
+    "S101",     # Assert can be used in tests
+    "PT004",    # Fixture does not return anything, add leading underscore
+] 
+
+[tool.ruff.lint.pydocstyle]
+convention = "google" # Google-style convention for for docstrings
+
+[tool.ruff.lint.isort] # Add optional configurations for import organization
+case-sensitive = true
+relative-imports-order = "closest-to-furthest"
 
 # Pytest settings ==============================================================
 [tool.pytest.ini_options]
