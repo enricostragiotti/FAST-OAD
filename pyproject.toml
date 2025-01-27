@@ -185,6 +185,7 @@ select = [
     "ARG",  # A flake8 plugin that checks for unused function arguments.
     "PTH",  # A plugin for flake8 finding use of functions that can be replaced by pathlib module.
     "Q",    # Flake8 Extension to lint for quotes.
+    "PL",   # Pylint rules
 ]
 
 # No rules are ignored by default. Specify rule codes here to suppress them.
