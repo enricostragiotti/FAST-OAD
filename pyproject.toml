@@ -193,6 +193,8 @@ ignore = [
     "ANN003",   # Missing type annotation for **kwargs
     "ANN101",   # Missing type annotation for self in method
     "ANN102",   # Missing type annotation for cls in classmethod
+    "D105",     # Checks for undocumented magic method definitions
+    "D205",     # Checks for docstring summary lines that are not separated from the docstring description by one blank line
     ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -207,6 +209,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
     "ARG001",   # No unused argument in tests
     "ANN001",   # No type annotation for tests
     "ANN201",   # Missing return type annotation for public function `test_list_modules`
+    "D100",     # Missing docstring in public module
     "D103",     # No missing docstring in public function
     "S101",     # Assert can be used in tests
     "PT004",    # Fixture does not return anything, add leading underscore
@@ -215,6 +218,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
     "ARG001",   # No unused argument in tests
     "ANN001",   # No type annotation for tests
     "ANN201",   # Missing return type annotation for public function `test_list_modules`
+    "D100",     # Missing docstring in public module
     "D103",     # No missing docstring in public function
     "S101",     # Assert can be used in tests
     "PT004",    # Fixture does not return anything, add leading underscore
